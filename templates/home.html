@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Check-In System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Check-In Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+       <div  class="nav-logo"> 
+            <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h1 class="logo-title"> CGI Chai </h1> 
+        </div>
+        <h1 class="bus-number"> <i class="fa-regular fa-bus"></i> Home </h1>
+           
+    <div class="nav-buttons">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus A') }}">Bus A</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus B') }}">Bus B</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus C') }}">Bus C</a>
+        <a href="{{ url_for('all_buses') }}">All Buses</a>
+    </div>
+    </div>
+<div class="home-container">
+    <div class="home-title">Bus Dashboard</div>
+    <div class="home-buttons">
+        <a href="/bus/Bus A" class="home-button">Bus A</a>
+        <a href="/bus/Bus B" class="home-button">Bus B</a>
+        <a href="/bus/Bus C" class="home-button">Bus C</a>
+        <a href="/all_buses" class="home-button">All Buses</a>
+    </div>
+</div>
+</body>
+
+</html>

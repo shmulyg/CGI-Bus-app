@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Check-In</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; }
+        .success { margin-top: 20px; color: green; font-size: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Scan Barcode to Check In</h2>
+    <form id="checkin-form">
+        <input type="text" name="barcode" id="barcode" placeholder="Scan barcode" autofocus required>
+        <button type="submit">Log</button>
+    </form>
+    <div class="success" id="success-msg"></div>
+
+    <script>
+        const form = document.getElementById('checkin-form');
+        const input = document.getElementById('barcode');
+        const successMsg = document.getElementById('success-msg');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/log', { method: 'POST', body: formData });
+            const result = await response.json();
+
+            if (result.success) {
+                successMsg.textContent = `✅ ${result.name} (Bunk ${result.bunk}) checked into ${result.bus}`;
+                input.value = '';
+                input.focus();
+            } else {
+                successMsg.textContent = `❌ Error: ${result.error || 'Something went wrong'}`;
+            }
+        });
+        input.focus();
+    </script>
+</body>
+</html>

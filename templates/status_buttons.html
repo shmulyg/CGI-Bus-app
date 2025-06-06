@@ -1,0 +1,9 @@
+<form action="/set_status/{{ student.id }}/checked_in" method="POST" style="display:inline;">
+    <button type="submit" class="btn checked_in {% if student.status == 'checked_in' %}active{% endif %}">✅</button>
+</form>
+<form action="/set_status/{{ student.id }}/checked_out" method="POST" style="display:inline;">
+    <button type="submit" class="btn checked_out {% if student.status == 'checked_out' %}active{% endif %}">↩️</button>
+</form>
+<form action="/set_status/{{ student.id }}/not_coming" method="POST" style="display:inline;">
+    <button type="submit" class="btn not_coming {% if student.status == 'not_coming' %}active{% endif %}">🚫</button>
+</form>

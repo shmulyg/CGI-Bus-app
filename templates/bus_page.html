@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+function searchTable() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(input) ? "" : "none";
+    });
+}
+
+function sortTable(colIndex) {
+    const table = document.querySelector("table");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    const isAscending = table.getAttribute("data-sort-dir") !== "asc";
+    table.setAttribute("data-sort-dir", isAscending ? "asc" : "desc");
+
+    rows.sort((a, b) => {
+        let aText, bText;
+        if (colIndex === 0) {
+            // Sort by status: checked_in < not_checked_in < not_coming
+            const statusOrder = { "checked_in": 1, "not_checked_in": 2, "not_coming": 3 };
+            const getStatus = row => {
+                if (row.classList.contains("faded")) return "not_coming";
+                const icon = row.querySelector("td .status");
+                if (icon && icon.classList.contains("checked_in")) return "checked_in";
+                return "not_checked_in";
+            };
+            aText = statusOrder[getStatus(a)];
+            bText = statusOrder[getStatus(b)];
+            return isAscending ? aText - bText : bText - aText;
+        } else {
+            aText = a.cells[colIndex].textContent.trim().toLowerCase();
+            bText = b.cells[colIndex].textContent.trim().toLowerCase();
+            return isAscending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+        }
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+}
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ bus }} Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   
+</head>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ bus }} Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div  class="nav-logo"> 
+            <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h1 class="logo-title"> CGI Chai </h1> 
+        </div>
+        <h1 class="bus-number"> <i class="fa-regular fa-bus"></i> {{ bus }}</h1>
+           
+        <div class="nav-buttons">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus A') }}">Bus A</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus B') }}">Bus B</a>
+        <a href="{{ url_for('bus_view', bus_id='Bus C') }}">Bus C</a>
+        <a href="{{ url_for('all_buses') }}">All Buses</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="status-boxes">
+            <div class="status-box checked-in">
+            <i class="fas fa-user-check"></i>
+            <div>
+                <div class="status-label">Checked In</div>
+                <div class="status-count">{{ checked_in }}</div>
+            </div>
+            </div>
+            <div class="status-box not-checked-in">
+            <i class="fas fa-user-times"></i>
+            <div>
+                <div class="status-label">Not Checked In</div>
+                <div class="status-count">{{ not_checked_in }}</div>
+            </div>
+            </div>
+        </div>
+        <h2>{{ bus }}</h2>
+        <form method="POST" action="{{ url_for('log_barcode', bus_id=bus) }}">
+            <input type="text" name="barcode" placeholder="Scan barcode..." autofocus required>
+            <button type="submit"><i class="fas fa-barcode"></i> Check In</button>
+        </form>
+        {% if success %}
+            <p class="success">{{ success }}</p>
+        {% elif error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)"><i class="fas fa-user-check"></i> Status <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(1)">First <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(2)">Last <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(3)">Bunk <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(4)">Bus <i class="fas fa-sort"></i></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr class="{{ 'faded' if student.status == 'not_coming' else '' }}">
+                        <td>
+                            {% if student.status == 'checked_in' %}
+                                <i class="fas fa-check-circle status checked_in"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ student.first_name }}</td>
+                        <td>{{ student.last_name }}</td>
+                        <td>{{ student.bunk }}</td>
+                        <td>{{ student.bus }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('set_status', student_id=student.id, status='checked_in') }}">
+                                <button class="btn btn-in {% if student.status == 'checked_in' %}active{% endif %}">Check In</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('set_status', student_id=student.id, status='not_checked_in') }}">
+                                <button class="btn btn-out {% if student.status == 'not_checked_in' %}active{% endif %}">Check Out</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('set_status', student_id=student.id, status='not_coming') }}">
+                                <button class="btn btn-not {% if student.status == 'not_coming' %}active{% endif %}">Not Coming</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
