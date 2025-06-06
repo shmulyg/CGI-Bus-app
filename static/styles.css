@@ -1,0 +1,409 @@
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fffdfb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #9fa369;
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    }
+
+  
+/* New nav-logo container to keep logo and title side by side */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Small gap for spacing */
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+.logo-title {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-left: 0;
+}
+
+.bus-number {
+        background: #fffbe6;
+        color: #73773d;
+        font-weight: bold;
+        border-radius: 6px;
+        padding: 6px 16px;
+        margin-left: 16px;
+        font-size: 1.1rem;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+        border: 1px solid #e6d0c2;
+        display: inline-block;
+    }
+
+    .nav-buttons {
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+
+    .nav-buttons a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: #73773d;
+        border-radius: 4px;
+        transition: background 0.3s;
+        margin-left: 12px;
+        font-weight: 500;
+        font-size: 1rem;
+        display: inline-block;
+    }
+
+    .navbar a {
+        /* Remove previous navbar a styles if using .nav-buttons a */
+    }
+
+.navbar a:hover {
+    background-color: #ffbe64;
+    color: #333;
+}
+
+.container {
+    padding: 20px;
+}
+
+form input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #bdd8db;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+form button {
+    background-color: #47919d;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+form button:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+.success {
+    color: green;
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+th {
+    background-color: #dcedef;
+    font-weight: bold;
+}
+
+.faded {
+    color: #999;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.btn {
+    
+    
+    padding: 4px 10px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    transform: scale(1.03);
+}
+
+.btn.active {
+    background-color: #9fa369;
+    color: white;
+    border-color: #9fa369;
+}
+
+/* Custom button colors */
+.btn-in {
+    background-color: #86d56d;
+    color: #fff;
+    border-color: #86d56d;
+}
+
+.btn-in:hover,
+.btn-in.active {
+    background-color: #6bb34e;
+    border-color: #6bb34e;
+    color: #fff;
+}
+
+.btn-out {
+    background-color: #e05656;
+    color: #fff;
+    border-color: #e05656;
+}
+
+.btn-out:hover,
+.btn-out.active {
+    background-color: #b93d3d;
+    border-color: #b93d3d;
+    color: #fff;
+}
+
+.btn-not {
+    background-color: #a3837b;
+    color: #fff;
+    border-color: #a3837b;
+}
+
+.btn-not:hover,
+.btn-not.active {
+    background-color: #7d635d;
+    border-color: #7d635d;
+    color: #fff;
+}
+
+.status.checked_in {
+    color: #86d56d;
+}
+.status-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.status-box {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    background-color: #dcedef; /* CGI Chai light background */
+    border-left: 4px solid transparent;
+    border-radius: 8px;
+    padding: 10px 16px;
+    min-width: 160px;
+    transition: background-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.status-box:hover {
+  background-color: #bdd8db; /* slightly darker hover */
+}
+
+.status-box i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: #47919d;
+}
+
+.checked-in {
+  border-left-color: #86d56d;
+}
+
+.not-checked-in {
+  border-left-color: #ff5e5a;
+}
+
+.status-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #333;
+}
+
+.status-count {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #555;
+}
+.bus-summary-box {
+    flex: 1 1 220px;
+    background-color: #dcedef; /* CGI Chai light blue */
+    border-left: 5px solid #47919d; /* CGI blue */
+    border-radius: 10px;
+    padding: 24px 28px; /* Increased padding for more space around text */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: background-color 0.2s ease;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.bus-summary-box:hover {
+    background-color: #c4dfe2;
+}
+
+.bus-line {
+    display: flex;
+    justify-content: flex-start; /* Put all text together (left aligned) */
+    align-items: center;
+    margin: 6px 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    gap: 12px; /* Add space between items if needed */
+}
+
+.bus-line i {
+    margin-right: 6px;
+    color: #47919d;
+}
+
+.bus-line .checked {
+    color: #9fa369;
+}
+
+.bus-line .not-checked {
+    color: #ffbe64;
+}
+
+.bus-summary-box h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #47919d;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.add-camper-form,
+.bulk-upload-form {
+  background-color: #f2dccd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  max-width: 400px;
+}
+
+.add-camper-form input,
+.bulk-upload-form input {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-camper-form button,
+.bulk-upload-form button {
+  background-color: #47919d;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-camper-form button:hover,
+.bulk-upload-form button:hover {
+  background-color: #377e8c;
+}
+.flash-messages {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.flash {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.flash.success {
+  background-color: #bdd8db;
+  color: #235b61;
+  border: 1px solid #47919d;
+}
+
+.flash.error {
+  background-color: #ffe6e6;
+  color: #902020;
+  border: 1px solid #ffaaaa;
+}
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.home-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.home-button {
+    background-color: #47919d; /* CGI Chai dark blue */
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: #367884;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.home-button:active {
+    transform: scale(0.97);
+}
+
+.home-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333;
+    font-weight: 600;
+}
